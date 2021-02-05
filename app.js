@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const Joi = require('@hapi/joi');
 const movies = require('./movies');
+const fs = require('fs');
 app.use(express.json());
 
 app.use('/abc', movies);
@@ -12,8 +13,9 @@ app.get('/', (req,res) => {
 })
 
 
+const __dirname=fs.realpathSync('.');
 app.get('*', (req, res)=>{
-    res.send("404 Not found");
+    res.sendFile(__dirname + "/404.html")
   });
 
 
