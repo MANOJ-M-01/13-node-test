@@ -18,6 +18,21 @@ app.get('*', (req, res)=>{
   });
 
 
+var con = mysql.createConnection({
+    host: "b99eswznfpeqxxc3pbyw-mysql.services.clever-cloud.com",
+    port: 3306,
+    user: "uijkjsvcfx0ttpzx",
+    password: "lSKCpzs2yqsgFSlOLt26",
+    database: "b99eswznfpeqxxc3pbyw",
+});
+
+app.get("/view", (req, res) => {
+    con.query("SELECT * FROM contacts", (err, result) => {
+        if (err) throw err;
+        res.writeHead(200, { 'Content-Type': 'application/json', "Access-Control-Allow-Origin": "*" });
+        res.end(JSON.stringify(result));
+    });
+});
 
 
 
